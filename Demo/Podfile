@@ -1,0 +1,31 @@
+workspace 'AdScopeWorkSpace.xcworkspace'
+
+inhibit_all_warnings!
+
+# demo工程
+project 'AdScopeDemo/AdScopeDemo.xcodeproj'
+
+target 'AdScopeDemo' do
+  platform :ios, '11.0'
+  project 'AdScopeDemo/AdScopeDemo.xcodeproj'
+  pod 'MJRefresh'
+  pod 'YYWebImage'
+#  pod 'YYImage/WebP'
+
+  #按需导入以下渠道
+  pod 'AMPSAdSDK', '~> 5.1.2.3'
+  pod 'AMPSYFAdapter','6.1.1.1' #亿帆适配器
+  pod 'YFAdsSDK/YFAdsSDK','6.1.1.1'
+  pod 'YFAdsSDK/YFAdsJDAdapter'
+  pod 'JADYun', '2.6.8'
+  pod 'JADYunMotion', '2.6.8'  # 京东摇一摇组件
+   
+end
+
+post_install do |installer|
+    installer.pods_project.targets.each do |target|
+        target.build_configurations.each do |config|
+            config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '11.0'
+        end
+    end
+end
